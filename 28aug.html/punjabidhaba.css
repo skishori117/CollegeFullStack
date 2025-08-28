@@ -1,0 +1,37 @@
+button{color: blue;
+background-color: yellow;
+width: 200px;
+height: 200px;
+
+
+}
+header{
+    align-content: left;
+    background-color: red;
+    
+}
+.sidebar{
+    background-color: black;
+    width: 200px;
+    height: 1000px;
+    float: right;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none
+    text-align: center;
+    color: white;
+   
+
+}
+.sidebar .nav a{
+    color: white;
+    text-decoration: none;
+}
+.sidebar a{
+    display: block;
+    color: black;
+    text-decoration:;
+    padding: 10px;
+    margin: 5px 0;
+}
+
