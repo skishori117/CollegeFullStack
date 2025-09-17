@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful View Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            padding: 20px;
+        }
+
+        .card-container {
+            perspective: 1000px;
+        }
+
+        .card {
+            width: 350px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                0 4px 15px rgba(0, 0, 0, 0.05);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(2deg) scale(1.05);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.2),
+                0 15px 30px rgba(0, 0, 0, 0.1),
+                0 0 40px rgba(0, 123, 255, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            background: url('https://images.unsplash.com/1/type-away-numero-dos.jpg?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWFuJTIwd29ya2luZyUyMG9uJTIwbGFwdG9wfGVufDB8fDB8fHww') center/cover;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(52, 152, 219, 0.1) 0%, 
+                rgba(155, 89, 182, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover .card-image::before {
+            opacity: 1;
+        }
+
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover .floating-icons {
+            opacity: 1;
+        }
+
+        .icon {
+            position: absolute;
+            color: white;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .wifi-icon { top: 20px; right: 20px; animation-delay: 0s; }
+        .code-icon { top: 40px; left: 25px; animation-delay: 1s; }
+        .notification-dot {
+            top: 30px;
+            right: 35px;
+            width: 8px;
+            height: 8px;
+            background: #e74c3c;
+            border-radius: 50%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .card-content {
+            padding: 25px;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-title {
+            color: #3498db;
+        }
+
+        .card-description {
+            font-size: 15px;
+            color: #7f8c8d;
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-description {
+            color: #34495e;
+        }
+
+        .card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(52, 152, 219, 0.05) 0%, 
+                rgba(155, 89, 182, 0.05) 100%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .card:hover .card-glow {
+            opacity: 1;
+        }
+
+        /* Subtle animation for the entire card */
+        @keyframes cardPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 4px 15px rgba(0, 0, 0, 0.05); }
+            50% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.08); }
+        }
+
+        .card {
+            animation: cardPulse 4s ease-in-out infinite;
+        }
+
+        .card:hover {
+            animation: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-glow"></div>
+            <div class="card-image">
+                <div class="floating-icons">
+                    <div class="icon wifi-icon">📶</div>
+                    <div class="icon code-icon">&lt;/&gt;</div>
+                    <div class="notification-dot"></div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">Beautiful View</h2>
+                <p class="card-description">This is a simple card with hover transition effects.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
